@@ -96,7 +96,7 @@
   function closeAll() {
     Serialport.closeAll()
       .then(() => {
-        console.log('删除全部成功!');
+        console.log('Successfully closed serial ports!');
       })
       .catch((err) => {
         console.error(err);
@@ -106,7 +106,7 @@
   function forceClose() {
     Serialport.forceClose('COM4')
       .then(() => {
-        console.log('强制删除成功!');
+        console.log('Successfully force closed serial ports!');
       })
       .catch((err) => {
         console.error(err);

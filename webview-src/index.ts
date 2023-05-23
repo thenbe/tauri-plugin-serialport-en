@@ -62,7 +62,7 @@ class Serialport {
   }
 
   /**
-   * @description: 获取串口列表
+   * @description: Get serial port list
    * @return {Promise<string[]>}
    */
   static async available_ports(): Promise<string[]> {
@@ -74,7 +74,7 @@ class Serialport {
   }
 
   /**
-   * @description: 强制关闭
+   * @description: Force close serial port
    * @param {string} path
    * @return {Promise<void>}
    */
@@ -85,7 +85,7 @@ class Serialport {
   }
 
   /**
-   * @description: 关闭所有串口
+   * @description: Close all serial ports
    * @return {Promise<void>}
    */
   static async closeAll(): Promise<void> {
@@ -93,7 +93,7 @@ class Serialport {
   }
 
   /**
-   * @description: 取消串口监听
+   * @description: Cancel serial port monitoring
    * @return {Promise<void>}
    */
   async cancelListen(): Promise<void> {
@@ -104,12 +104,12 @@ class Serialport {
       }
       return;
     } catch (error) {
-      return Promise.reject('取消串口监听失败: ' + error);
+      return Promise.reject('Error cancelling listen: ' + error);
     }
   }
 
   /**
-   * @description: 取消读取数据
+   * @description: Cancel read data
    * @return {Promise<void>}
    */
   async cancelRead(): Promise<void> {
@@ -150,7 +150,7 @@ class Serialport {
   }
 
   /**
-   * @description: 关闭串口
+   * @description: Close the serial port
    * @return {Promise<InvokeResult>}
    */
   async close(): Promise<void> {
@@ -172,7 +172,7 @@ class Serialport {
   }
 
   /**
-   * @description: 监听串口信息
+   * @description: Listen to serial port
    * @param {function} fn
    * @return {Promise<void>}
    */
@@ -198,21 +198,21 @@ class Serialport {
       );
       return;
     } catch (error) {
-      return Promise.reject('监听串口数据失败: ' + error);
+      return Promise.reject('Error to listen: ' + error);
     }
   }
 
   /**
-   * @description: 打开串口
+   * @description: Open serial port
    * @return {*}
    */
   async open(): Promise<void> {
     try {
       if (!this.options.path) {
-        return Promise.reject(`path 不能为空!`);
+        return Promise.reject(`Path cannot be empty!`);
       }
       if (!this.options.baudRate) {
-        return Promise.reject(`baudRate 不能为空!`);
+        return Promise.reject(`Baudrate cannot be empty!`);
       }
       if (this.isOpen) {
         return;
@@ -234,8 +234,8 @@ class Serialport {
   }
 
   /**
-   * @description: 读取串口信息
-   * @param {ReadOptions} options 读取选项 { timeout, size }
+   * @description: Read serial port data
+   * @param {ReadOptions} options { timeout, size }
    * @return {Promise<void>}
    */
   async read(options?: ReadOptions): Promise<void> {
@@ -251,7 +251,7 @@ class Serialport {
   }
 
   /**
-   * @description: 设置串口 波特率
+   * @description: Set serial port baud rate
    * @param {number} value
    * @return {Promise<void>}
    */
@@ -273,7 +273,7 @@ class Serialport {
   }
 
   /**
-   * @description: 设置串口 path
+   * @description: Set serial port path
    * @param {string} value
    * @return {Promise<void>}
    */
@@ -295,14 +295,14 @@ class Serialport {
   }
 
   /**
-   * @description: 串口写入数据
+   * @description: Write data to serial port
    * @param {string} value
    * @return {Promise<number>}
    */
   async write(value: string): Promise<number> {
     try {
       if (!this.isOpen) {
-        return Promise.reject(`串口 ${this.options.path} 未打开!`);
+        return Promise.reject(`Serial port ${this.options.path} is not opened!`);
       }
       return await invoke<number>('plugin:serialport|write', {
         value,
@@ -314,14 +314,14 @@ class Serialport {
   }
 
   /**
-   * @description: 写入二进制数据到串口
+   * @description: Write binary data to serial port
    * @param {Uint8Array} value
    * @return {Promise<number>}
    */
   async writeBinary(value: Uint8Array | number[]): Promise<number> {
     try {
       if (!this.isOpen) {
-        return Promise.reject(`串口 ${this.options.path} 未打开!`);
+        return Promise.reject(`Serial port ${this.options.path} is not open!`);
       }
       if (value instanceof Uint8Array || value instanceof Array) {
         return await invoke<number>('plugin:serialport|write_binary', {
@@ -330,7 +330,7 @@ class Serialport {
         });
       } else {
         return Promise.reject(
-          'value 参数类型错误! 期望类型: string, Uint8Array, number[]',
+          'Argument type error! Expected type: string, Uint8Array, number[]',
         );
       }
     } catch (error) {
