@@ -1,5 +1,5 @@
 {
-  "name": "tauri-plugin-serialport-api",
+  "name": "@thenbe/tauri-plugin-serialport-api",
   "version": "0.0.4",
   "author": "lzhida <zhidal@qq.com>",
   "description": "A tauri plugin developed based on Serialport.",
@@ -9,7 +9,9 @@
   "scripts": {
     "build": "rollup -c ./webview-src/rollup.config.js",
     "prepublishOnly": "yarn build",
-    "pretest": "yarn build"
+    "pretest": "yarn build",
+    "prepack": "yarn build",
+		"release": "yarn publish --publish-branch master --access public"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "13.3.0",
