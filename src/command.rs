@@ -6,7 +6,7 @@ use std::sync::mpsc;
 use std::sync::mpsc::{Receiver, Sender, TryRecvError};
 use std::thread;
 use std::time::Duration;
-use tauri::{command, AppHandle, Runtime, State, Window};
+use tauri::{command, AppHandle, Manager, Runtime, State, Window};
 
 /// `get_worksheet` according to `path` and `sheet_name` get the file sheet instance
 fn get_serialport<T, F: FnOnce(&mut SerialportInfo) -> Result<T, Error>>(
