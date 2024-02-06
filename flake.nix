@@ -25,7 +25,7 @@
             glib
             gtk3
             libsoup
-            webkitgtk
+            webkitgtk_4_1
             appimagekit
             librsvg
 
