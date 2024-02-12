@@ -1,6 +1,6 @@
 import { UnlistenFn } from '@tauri-apps/api/event';
 import { invoke } from '@tauri-apps/api/core';
-import { appWindow } from '@tauri-apps/api/window';
+import { Webview } from '@tauri-apps/api/webview';
 
 export interface InvokeResult {
   code: number;
@@ -180,6 +180,7 @@ class Serialport {
     try {
       await this.cancelListen();
       let readEvent = 'plugin-serialport-read-' + this.options.path;
+      const appWindow = Webview.getCurrent()
       this.unListen = await appWindow.listen<ReadDataResult>(
         readEvent,
         ({ payload }) => {
