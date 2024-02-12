@@ -6,9 +6,13 @@ description = "A tauri plugin developed based on Serialport."
 edition = "2021"
 rust-version = "1.57"
 exclude = ["/examples", "/webview-dist", "/webview-src", "node_modules"]
+links = "tauri-plugin-serialport"
 
 [dependencies]
 tauri = { version = "2.0.0-beta" }
 serde = "1.0"
 thiserror = "1.0"
 serialport = {version = "4.2.0"}
+
+[build-dependencies]
+tauri-plugin = { version = "2.0.0-beta.0", features = ["build"] }
